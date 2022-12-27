@@ -1,0 +1,63 @@
+alphabets = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x","y", "z"]
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+symbol = ["?",":","!","@","#","$","%","^","&","*","_","+","/","|","."]
+
+def is_symbol(n):
+    if symbol.count(n) == True:
+        return True
+    else:
+        return True
+
+def encode(sentence, shift):
+    n_string = ""
+    for n in sentence:
+        if n == " ":
+            n_string += " "
+        elif n.isnumeric() == True:
+            n_string += n
+        elif symbol.count(n) == True:
+            n_string += n
+        else:
+            ind1 = alphabets.index(n)
+            ind2 = ind1 + shift
+            num = ind2 % 26
+            al = alphabets[num]
+            n_string += al
+    return (n_string)
+
+
+def decode(sentence, shift):
+    decode = ""
+    for n in sentence:
+        if n == " ":
+            decode += " "
+        elif n.isnumeric() == True:
+            decode += n
+        elif symbol.count(n) == True:
+            decode += n
+        else:
+            ind1 = alphabets.index(n)
+            ind2 = ind1 - shift
+            num = ind2 % 26
+            al = alphabets[num]
+            decode += al
+    return decode
+
+game = True
+while game == True:
+    option = int(input("what do you wanna do, Press 1.Encode, 2.Decode, 3.Stop : "))
+    if option == 1:
+        sentence = input("enter the sentence to encode :")
+        shift = int(input("enter the shift : "))
+        x = encode(sentence=sentence,shift=shift)
+        print(x)
+    elif option == 2:
+        message = input("enter the message to decode :")
+        shift = int(input("enter the shift : "))
+        x = decode(sentence=message, shift=shift)
+        print(x)
+    elif option == 3:
+        print("Thanks for using our App.")
+        game = False
+    else:
+        print("WARNING ! ENTER THE VALID OPTION.")
